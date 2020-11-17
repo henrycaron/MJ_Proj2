@@ -6,6 +6,21 @@ import sklearn.neighbors
 
 from collections import OrderedDict
 
+def load_word_embeddings():
+    zip_file_path = os.path.join(
+        'pretrained_embedding_vectors/',
+        'glove.6B.50d.txt.zip')
+
+    word_embeddings = pd.read_csv(
+        zip_file_path,
+        header=None, sep=' ', index_col=0,
+        nrows=100000, compression='zip', encoding='utf-8', quoting=3)
+
+    # Build a dict that will map from string word to 50-dim vector
+    word_list = word_embeddings.index.values.tolist()
+    word2vec = OrderedDict(zip(word_list, word_embeddings.values))
+    return word2vec
+
 if __name__ == '__main__':
 
     zip_file_path = os.path.join(
