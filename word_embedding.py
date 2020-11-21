@@ -6,6 +6,7 @@ import sklearn.tree
 import sklearn.ensemble
 from pprint import pprint 
 from load_word_embeddings import load_word_embeddings
+import nltk
 # from keras.preprocessing.sequence import pad_sequences
 
 
@@ -120,33 +121,17 @@ if __name__ == "__main__":
     # print(grid.best_score_)
     
     # forest model
-    forest_hyperparameter_grid_by_name = dict(
-        max_features=[3, 10, 20, 35, 49],
-        max_depth=[16, 32],
-        min_samples_leaf=[1],
-        n_estimators=[125],
-        random_state=[101],
-    )
-    forest = sklearn.ensemble.RandomForestClassifier(
-        n_estimators=125,
-        criterion='gini',
-        max_depth=15,
-        min_samples_split=2,
-        min_samples_leaf=1)
-    
-    forest_searcher = sklearn.model_selection.GridSearchCV(
-        forest,
-        forest_hyperparameter_grid_by_name,
-        scoring='balanced_accuracy',
-        cv=7,
-        return_train_score=True,
-        refit=False)
-        
-    forest_searcher.fit(x_train_df, y_train_df['is_positive_sentiment'])
-    
-    forest_search_results = pd.DataFrame(forest_searcher.cv_results_).copy()
-    print(forest_searcher.best_params_)
-    print(forest_searcher.best_score_)
+    # forest_hyperparameter_grid_by_name = dict(
+    #     max_features=[3, 10, 20, 35, 49],
+    #     max_depth=[16, 32],
+    #     min_samples_leaf=[1],
+    #     n_estimators=[125],
+    #     random_state=[101],
+    # )
+    # forest = sklearn.ensemble.RandomForestClassifier(
+    #     n_estimators=125,
+    #     criterion='gini',
+    #     mS
     
     # lasso model
     # lasso = sklearn.linear_model.LogisticRegression(
